@@ -1,0 +1,2 @@
+# midi-sniffer
+A simple C++ program that allows to keep track of MIDI communication between a device and software. It uses [RtMidi](https://github.com/thestk/rtmidi); [virtualMIDI](https://www.tobias-erichsen.de/software/virtualmidi.html) is additionally required on Windows for creating virtual MIDI ports.
