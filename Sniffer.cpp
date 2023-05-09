@@ -23,6 +23,8 @@ std::string toHex(int value) {
 }
 
 void Sniffer::inCallback(const std::vector<unsigned char>& data) {
+	std::lock_guard<std::mutex> outGuard(outMutex);
+
 	std::cout << "\x1B[91mDEVICE: ";
 	for (int i = 0; i < data.size(); ++i) {
 		std::cout << "0x" << toHex(data[i]);
@@ -35,6 +37,8 @@ void Sniffer::inCallback(const std::vector<unsigned char>& data) {
 }
 
 void Sniffer::outCallback(const std::vector<unsigned char>& data) {
+	std::lock_guard<std::mutex> outGuard(outMutex);
+
 	std::cout << "\x1B[94mSOFTWARE: ";
 	for (int i = 0; i < data.size(); ++i) {
 		std::cout << "0x" << toHex(data[i]);

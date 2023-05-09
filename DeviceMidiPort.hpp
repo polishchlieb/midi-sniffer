@@ -4,16 +4,17 @@
 #include <functional>
 #include <thread>
 #include <RtMidi.h>
+#include "MidiPort.hpp"
 
-class DeviceMidiPort {
+class DeviceMidiPort : public MidiPort {
 public:
 	typedef std::function<void(const std::vector<unsigned char>& data)> Callback;
 
 	DeviceMidiPort(unsigned int inPort, unsigned int outPort);
 
-	void send(const std::vector<unsigned char>& data);
-	void join();
-	void setCallback(const Callback& dataCallback);
+	void send(const std::vector<unsigned char>& data) override;
+	void join() override;
+	void setCallback(const Callback& dataCallback) override;
 private:
 	std::thread inListener;
 	RtMidiIn inPort;

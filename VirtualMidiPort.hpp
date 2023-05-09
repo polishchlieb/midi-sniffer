@@ -1,8 +1,7 @@
 #pragma once
 #include <string>
-#include <vector>
-#include <functional>
 #include <thread>
+#include "MidiPort.hpp"
 
 #ifdef _WIN32
 #include <teVirtualMIDI.h>
@@ -10,16 +9,16 @@
 #include <RtMidi.h>
 #endif
 
-class VirtualMidiPort {
+class VirtualMidiPort : public MidiPort {
 public:
 	typedef std::function<void(const std::vector<unsigned char>& data)> Callback;
 
 	VirtualMidiPort(std::string name);
 	~VirtualMidiPort();
 
-	void send(const std::vector<unsigned char>& data);
-	void join();
-	void setCallback(const Callback& dataCallback);
+	void send(const std::vector<unsigned char>& data) override;
+	void join() override;
+	void setCallback(const Callback& dataCallback) override;
 private:
 	std::thread inListener;
 #ifdef _WIN32

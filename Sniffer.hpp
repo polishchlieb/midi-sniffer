@@ -10,6 +10,8 @@ public:
 	void join();
 
 private:
+	std::mutex outMutex;
+
 	DeviceMidiPort devicePort;
 	VirtualMidiPort virtualPort;
 
